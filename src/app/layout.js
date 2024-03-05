@@ -1,4 +1,5 @@
 import "@/app/scss/style.scss";
+import Globalboard from "./(components)/globalboard";
 
 export const metadata = {
   title: "Create Next App",
@@ -10,6 +11,7 @@ export default function RootLayout({ children }) {
     <html lang="ko">
       <body>
         {children}
+        <Globalboard />
       </body>
     </html>
   );
