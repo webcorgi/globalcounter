@@ -1,23 +1,24 @@
-'use client'
-import {useState} from 'react'
+"use client"
+import { countState } from "@/lib/store/countState";
+import { useRecoilState } from "recoil";
+import react, {useEffect} from "react"
+
 
 export default function Game() {
-    const [score, setScore] = useState(0);
-    const handeClick = () => {
+    const [score, setScore] = useRecoilState(countState)
+
+    const increment = () => {
         setScore(score + 1)
     }
-    /*********************************
-     * DB
-     * *******************************/
 
-    /*********************************
-     * // DB
-     * *******************************/
+    useEffect(() => {
+        console.log(`score:${score}`)
+    }, [score]);
+
     return (
         <div className="game">
-            <button onClick={handeClick}>click</button>
-            <div className="score">count: {score}
-            </div>
+            <button onClick={increment}>click</button>
+            <div className="score">count: {score}</div>
         </div>
     )
-};
+}
