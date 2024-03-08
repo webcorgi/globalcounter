@@ -7,15 +7,16 @@ import { countState } from "@/lib/store/countState";
 import { isoState } from '@/lib/store/isoState';
 
 export default function GlobalboardList({countries}){
-    const [iso, setIso] = useRecoilState(isoState)
-    let isoCount = countries.filter((e) => e.country_code == iso)[0].country_count
+    const [iso, setIso] = useRecoilState(isoState) // 접속한 유저 국가
+    let isoCount = countries.filter((e) => e.country_code == iso)[0].country_count // 접속한 유저 국가의 총 카운트
 
-    const [score, setScore] = useRecoilState(countState)
-    const [resultCount, setResultCount] = useState(isoCount ?? 0)
-    const sortedCountries = countries.sort((a, b) => b.country_count - a.country_count)
+    const [score, setScore] = useRecoilState(countState) // 유저가 접속후 추가로 클릭한 recoil 카운트
+    const [resultCount, setResultCount] = useState(isoCount ?? 0) // 접속한 유저국가의 DB 카운트 + 클릭한 카운트
+    const sortedCountries = countries.sort((a, b) => b.country_count - a.country_count) // 오름차순 정렬
 
+
+    // 클릭할때마다 카운트 갱신
     useEffect(() => {
-        /* 현재 국가 DB의 카운트 + 클릭한 카운트 */
         setResultCount(isoCount+score)
     }, [score]);
 
