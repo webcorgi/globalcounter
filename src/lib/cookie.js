@@ -1,7 +1,7 @@
 'use server'
 import {cookies} from 'next/headers'
 
-// nextjs14쿠키. 아래는 참고자료. 미사용중
+// nextjs14쿠키. 아래는 참고자료.
 // https://nextjs.org/blog/next-14
 // https://nextjs.org/docs/app/api-reference/functions/cookies
 const cookieStore = cookies()
