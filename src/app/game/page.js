@@ -1,19 +1,19 @@
 "use client"
+
 import { countState } from "@/lib/store/countState";
 import { useRecoilState } from "recoil";
-import react, {useEffect} from "react"
-
+import { updateoneDB } from "@/lib/db/dbservice_mongodb";
+import { ISOCodeCookies } from "../(components)/ISOCodeCookies";
+import { isoState } from "@/lib/store/isoState";
 
 export default function Game() {
+    const [iso, setIso] = useRecoilState(isoState)
     const [score, setScore] = useRecoilState(countState)
 
-    const increment = () => {
+    const increment = async() => {
         setScore(score + 1)
+        await updateoneDB(iso)
     }
-
-    useEffect(() => {
-        console.log(`score:${score}`)
-    }, [score]);
 
     return (
         <div className="game">

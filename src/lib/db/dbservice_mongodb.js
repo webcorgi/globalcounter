@@ -1,6 +1,8 @@
+'use server'
+
 import connectDB from './connectDB';
 import countriesModel from './models/countriesModel'
-import fs from 'fs';
+// import fs from 'fs';
 
 /****************************************
  * @name CREATE
@@ -70,8 +72,8 @@ export async function readoneDB(){
         country_code:"AM"
     }
     countriesModel.findOne(findData)
-    .then(countriesModel => console.log('countriesModel:', countriesModel))
-    .catch(err => console.error('Error fetching countriesModel:', err));
+        .then(countriesModel => console.log('countriesModel:', countriesModel))
+        .catch(err => console.error('Error fetching countriesModel:', err));
 }
 
 /****************************************
@@ -88,8 +90,8 @@ export async function updateDB(){
     }
 
     countriesModel.updateOne(updateData)
-    .then(() => console.log('country updated successfully'))
-    .catch(err => console.error('Error updating country:', err));
+        .then(() => console.log('country updated successfully'))
+        .catch(err => console.error('Error updating country:', err));
 }
 /**
  * @name updateoneDB
@@ -102,21 +104,21 @@ export async function updateoneDB(isocode){
     }
 
     countriesModel.findOne(updateData)
-    .then((contry) => {
-        if(!contry){
-            console.log('contry not found')
-            return
-        }
+        .then((contry) => {
+            if(!contry){
+                console.log('contry not found')
+                return
+            }
 
-        // 데이터 수정
-        contry.country_count = contry.country_count+1
+            // 데이터 수정
+            contry.country_count = contry.country_count+1
 
-        // 수정된 데이터 저장
-        contry.save()
-            .then(() => console.log('contry updated successfully'))
-            .catch(err => console.error('Error updating contry:', err));
-    })
-    .catch(err => console.error('Error updating country:', err));
+            // 수정된 데이터 저장
+            contry.save()
+                .then(() => console.log('contry updated successfully'))
+                .catch(err => console.error('Error updating contry:', err));
+        })
+        .catch(err => console.error('Error updating country:', err));
 }
 
 
@@ -145,7 +147,6 @@ export async function deleteAllDB(){
     .then(() => console.log('All data deleted successfully'))
     .catch(err => console.error('Error deleting data:', err));
 }
-
 
 
 

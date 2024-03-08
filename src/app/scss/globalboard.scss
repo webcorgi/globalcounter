@@ -53,4 +53,13 @@
         right: 5px;
         top: 5px;
     }
+
+    & .myflag {
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        margin-left: 10px;
+        position: relative;
+        top: -2px;
+        height: 100%;
+    }
 }

@@ -1,35 +1,14 @@
-import { setCookie, parseCookies } from 'nookies';
+'use server'
+import {cookies} from 'next/headers'
 
-// 클라이언트 측에서 쿠키 설정하기
-export function cookieSetter(name, value){
-    // setCookie(null, 'username', 'John Doe', {
-    setCookie(null, name, value, {
-        maxAge: 30 * 24 * 60 * 60, // 쿠키 유효 기간 (초 단위)
-        path: '/', // 쿠키가 적용되는 경로
-    });
+// nextjs14쿠키. 아래는 참고자료. 미사용중
+// https://nextjs.org/blog/next-14
+// https://nextjs.org/docs/app/api-reference/functions/cookies
+const cookieStore = cookies()
+export async function setCookie(name, isocode) {
+    cookieStore.set(name, isocode)
 }
-
-// 클라이언트 측에서 쿠키 가져오기
-export function cookieGetter(){
-    const cookies = parseCookies();
-    const value = cookies.dh;
-    // console.log(value)
-    return value
-}
-
-/******************
- *  IP
- *****************/
-export function getCookieIP(){
-    const cookies = parseCookies();
-    const value = cookies.userip;
-    // console.log(value)
-    return value
-}
-export function setCookieIP(value){
-    // setCookie(null, 'username', 'John Doe', {
-    setCookie(null, 'userip', value, {
-        maxAge: 30 * 24 * 60 * 60, // 쿠키 유효 기간 (초 단위)
-        path: '/', // 쿠키가 적용되는 경로
-    });
+export async function getCookie(name) {
+    const cookie = cookieStore.get(name)
+    return cookie
 }

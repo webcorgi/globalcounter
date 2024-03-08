@@ -1,8 +1,8 @@
 import { connectTestMongodb, createDB, deleteAllDB, deleteDB, insertAllDB, readDB, readoneDB, theFirstCreate, updateDB, updateoneDB } from "@/lib/db/dbservice_mongodb"
 import Game from "./game/page"
 import Globalboard from "./(components)/globalboard"
-import GetUserIP from "@/lib/GetUserIP"
-import { getCookieIP, setCookieIP } from "@/lib/cookie"
+import { ISOCodeCookies } from "./(components)/ISOCodeCookies"
+import SaveISO from "./(components)/SaveISO"
 
 export default async function Home() {
   /***********************************
@@ -15,24 +15,18 @@ export default async function Home() {
   // await updateDB()
   // await deleteDB()
   // await readoneDB()
-  // await updateoneDB()
+  // await updateoneDB('KR')
   // await deleteAllDB()
   // await createAllDB()
   // await insertAllDB()
 
-
-  /**********************************
-   * IP
-   **********************************/
-  const userIP = GetUserIP()
-  const cookieip = getCookieIP()
-  if( !cookieip ) await setCookieIP(userIP)
-
+  const getCookie = await ISOCodeCookies()
 
   return (
     <main className="home">
+      <SaveISO isocode={getCookie.value} />
       <Game />
-      <Globalboard />
+      <Globalboard isocode={getCookie.value} />
     </main>
   )
 }
