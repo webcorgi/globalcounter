@@ -2,9 +2,9 @@ import Image from 'next/image'
 import { readDB } from '@/lib/db/dbservice_mongodb';
 import GlobalboardList from './GlobalboardList';
 
-export default async function Globalboard({isocode}){
+export default async function Globalboard({isocode}:any){
     const countries = await readDB()
-    const countryFlag = countries.filter((country) => country.country_code == isocode)[0].country_code;
+    const countryFlag = countries.filter((country:{country_code:string}) => country.country_code == isocode)[0].country_code;
 
     return(
         <div className="globalboard">

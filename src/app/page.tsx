@@ -1,10 +1,10 @@
 import { connectTestMongodb, createDB, deleteAllDB, deleteDB, insertAllDB, readDB, readoneDB, theFirstCreate, updateDB, updateoneDB } from "@/lib/db/dbservice_mongodb"
 import Game from "./game/page"
 import Globalboard from "./(components)/globalboard"
-import { ISOCodeCookies } from "./(components)/ISOCodeCookies"
 import SaveISO from "./(components)/SaveISO"
+import { ISOCodeCookies } from "@/lib/cookie"
 
-export default async function Home() {
+export default async function Home()  {
   /***********************************
    * DB테스트
    ***********************************/
@@ -21,12 +21,16 @@ export default async function Home() {
   // await insertAllDB()
 
   const getCookie = await ISOCodeCookies()
+  // console.log("🚀 ~ Home ~ getCookie:", getCookie)
 
   return (
     <main className="home">
-      <SaveISO isocode={getCookie.value} />
-      <Game />
-      <Globalboard isocode={getCookie.value} />
+      <SaveISO isocode={getCookie} />
+
+
+      {/* 글로벌 카운트 */}
+      {/* <Game />
+      <Globalboard isocode={getCookie} /> */}
     </main>
   )
 }
